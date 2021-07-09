@@ -28,6 +28,7 @@
 		36557A3026920C5D00DBC5E3 /* bipmat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bipmat.h; path = ../../../bipmat.h; sourceTree = "<group>"; };
 		36557A3126920C5E00DBC5E3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../main.cpp; sourceTree = "<group>"; };
 		36557A3226920C5E00DBC5E3 /* bipmat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bipmat.cpp; path = ../../../bipmat.cpp; sourceTree = "<group>"; };
+		36557A37269848E400DBC5E3 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graph.h; path = ../../../graph.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +61,10 @@
 		36557A2826920C2000DBC5E3 /* xcode */ = {
 			isa = PBXGroup;
 			children = (
+				36557A37269848E400DBC5E3 /* graph.h */,
+				36557A3126920C5E00DBC5E3 /* main.cpp */,
 				36557A3226920C5E00DBC5E3 /* bipmat.cpp */,
 				36557A3026920C5D00DBC5E3 /* bipmat.h */,
-				36557A3126920C5E00DBC5E3 /* main.cpp */,
 			);
 			path = xcode;
 			sourceTree = "<group>";

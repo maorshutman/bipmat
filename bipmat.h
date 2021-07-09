@@ -1,33 +1,29 @@
-//
-//  bipmat.h
-//  bipmat
-//
-//  Created by Maor Shutman on 04/07/2021.
-//  Copyright © 2021 Maor Shutman. All rights reserved.
-//
-
 #ifndef bipmat_h
 #define bipmat_h
 
 #include <vector>
+#include <unordered_set>
+#include "graph.h"
 
 
-namespace bm { class BipartiteMatcher {
+namespace wbm { class BipartiteMatcher {
     private:
-        std::vector<std::vector<float>> costs;
-        int n = 0;
-        int m = 0;
+        std::vector<std::vector<int>> costs;
+        int n;
+    
+        BipartiteGraph* graph;
+        std::unordered_set<Edge*> M;
     
     public:
         BipartiteMatcher(std::string input_path);
+        BipartiteMatcher(int n);
         ~BipartiteMatcher();
         
-        void match_max();
-        void match_min();
-    
+        void add_edge(int v, int w, int cost);
+        void match();
         void print_costs();
+        void print_matching();
         int get_n() { return n; }
-        int get_m() { return m; }
     
 };
 

@@ -1,11 +1,3 @@
-//
-//  bipmat.cpp
-//  bipmat
-//
-//  Created by Maor Shutman on 04/07/2021.
-//  Copyright © 2021 Maor Shutman. All rights reserved.
-//
-
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -14,17 +6,18 @@
 #include "bipmat.h"
 
 
-namespace bm {
+namespace wbm {
 
 BipartiteMatcher::BipartiteMatcher(std::string input_path)
 {
     std::ifstream input(input_path);
     std::string line;
-    float val;
+    int val;
+    n = 0;
     
     while (getline(input, line))
     {
-        std::vector<float> row;
+        std::vector<int> row;
         std::istringstream ss(line);
     
         while (ss >> val) {
@@ -32,7 +25,7 @@ BipartiteMatcher::BipartiteMatcher(std::string input_path)
         }
         
         if (n == 0) {
-            n = row.size();
+            n = int(row.size());
         } else {
             assert(n == row.size());
         }
@@ -40,7 +33,12 @@ BipartiteMatcher::BipartiteMatcher(std::string input_path)
         costs.push_back(row);
     }
     
-    m = costs.size();
+}
+
+    
+BipartiteMatcher::BipartiteMatcher(int n) {
+    this->n = n;
+    this->graph = new BipartiteGraph(n);
 }
 
 
@@ -49,13 +47,16 @@ BipartiteMatcher::~BipartiteMatcher()
 }
 
     
-void BipartiteMatcher::match_max()
+void BipartiteMatcher::match()
 {
+    graph->print_graph();
+    
+    // TODO
 }
 
-    
-void BipartiteMatcher::match_min()
-{
+
+void BipartiteMatcher::add_edge(int v, int w, int cost) {
+    graph->add_edge(v, w, cost);
 }
 
 
@@ -67,6 +68,11 @@ void BipartiteMatcher::print_costs()
         }
         std::cout << "\n";
     }
+}
+    
+    
+void BipartiteMatcher::print_matching() {
+
 }
     
 }
