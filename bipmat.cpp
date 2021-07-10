@@ -38,7 +38,7 @@ BipartiteMatcher::BipartiteMatcher(std::string input_path)
     
 BipartiteMatcher::BipartiteMatcher(int n) {
     this->n = n;
-    this->graph = new BipartiteGraph(n);
+    graph = new BipartiteGraph(n);
 }
 
 
@@ -50,12 +50,50 @@ BipartiteMatcher::~BipartiteMatcher()
 void BipartiteMatcher::match()
 {
     graph->print_graph();
+    std::cout << "Num edges = " << graph->edges.size() << "\n";
     
-    // TODO
+    std::vector<Edge*> path;
+    std::vector<Edge*> set;
+    
+//    SearchTree* st = nullptr;
+    
+    while (M.size() != n) {  // if matching is not perferct
+        
+        path.clear();
+        set.clear();
+        
+        graph->search_good_path(path, set);
+        
+        if (path.size() != 0) {  // found a good path
+            augment(path);
+        } else {
+            
+            graph->update_prices(set);
+        }
+        
+    }
+
 }
 
 
-void BipartiteMatcher::add_edge(int v, int w, int cost) {
+void BipartiteMatcher::augment(std::vector<Edge*> &path)
+{
+    for (int i = 0; i < path.size(); i++) {
+        if (!(M.find(path[i]) != M.end())) {
+            M.insert(path[i]);
+            graph->v_matched[path[i]->v] = 1;
+            graph->w_matched[path[i]->w] = 1;
+        } else {
+            M.erase(path[i]);
+            graph->v_matched[path[i]->v] = 0;
+            graph->w_matched[path[i]->w] = 0;
+        }
+    }
+}
+
+
+void BipartiteMatcher::add_edge(int v, int w, int cost)
+{
     graph->add_edge(v, w, cost);
 }
 
@@ -71,8 +109,8 @@ void BipartiteMatcher::print_costs()
 }
     
     
-void BipartiteMatcher::print_matching() {
-
+void BipartiteMatcher::print_matching()
+{
 }
     
 }

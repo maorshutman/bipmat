@@ -8,12 +8,13 @@
 
 namespace wbm { class BipartiteMatcher {
     private:
-        std::vector<std::vector<int>> costs;
         int n;
-    
+        std::vector<std::vector<int>> costs;
         BipartiteGraph* graph;
         std::unordered_set<Edge*> M;
     
+        void augment(std::vector<Edge*> &path);
+
     public:
         BipartiteMatcher(std::string input_path);
         BipartiteMatcher(int n);
