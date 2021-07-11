@@ -29,6 +29,8 @@ struct TreeNode {
         parent_edge = nullptr;
     }
     
+    ~TreeNode() {}
+    
     void add_child (TreeNode *node) {
         node->parent = this;
         children.push_back(node);
@@ -40,9 +42,23 @@ struct SearchTree {
     TreeNode *root;
     std::vector<TreeNode*> leafs;
     
-    SearchTree(int k) {
+    SearchTree() {}
+    
+    ~SearchTree() {
+        delete_nodes(root);
+    }
+        
+    void set_root(int k) {
         root = new TreeNode(k);
         leafs.push_back(root);
+    }
+    
+    void delete_nodes(TreeNode *node) {
+        if (!node) { return; }
+        for (TreeNode* nd : node->children) {
+            delete_nodes(nd);
+        }
+        delete node;
     }
 };
 
@@ -84,30 +100,12 @@ struct BipartiteGraph {
         W[w].push_back(edge);
     }
 
-    void print_graph() {
-        std::cout << "V:" << "\n";
-        for (int i = 0; i < V.size(); i++) {
-            std::cout << i << "-> ";
-            for (int j = 0; j < V[i].size(); j++) {
-                std::cout << "(" << V[i][j]->v << "," << V[i][j]->w << "," << V[i][j]->cost << "), ";
-            }
-            std::cout << "\n";
-        }
-
-        std::cout << "W:" << "\n";
-        for (int i = 0; i < W.size(); i++) {
-            std::cout << i << "-> ";
-            for (int j = 0; j < W[i].size(); j++) {
-                std::cout << "(" << W[i][j]->v << "," << W[i][j]->w << "," << W[i][j]->cost << "), ";
-            }
-            std::cout << "\n";
-        }
-    }
-
-    void search_good_path(std::vector<Edge*> &path, std::vector<Edge*> &set) {
+    void search_good_path(SearchTree *st,
+                          std::vector<Edge*> &path,
+                          std::unordered_set<int> &v_visited,
+                          std::unordered_set<int> &w_visited)
+    {
         
-        std::unordered_set<int> v_visited;
-        std::unordered_set<int> w_visited;
         size_t prev_num_visited_vs = 0;
         size_t prev_num_visited_ws = 0;
         int stuck = 0;
@@ -123,9 +121,10 @@ struct BipartiteGraph {
         // No good path, since there are no unmatches v's.
         if (r == -1) { return; }
         
-        // TODO: make st a member?
-        SearchTree st(r);
+        // TODO: If updated the prices, can continue with the same tree, and save work ?
+        st->set_root(r);
         TreeNode* path_head = nullptr;
+        v_visited.insert(r);
         
         int level_even = 0;
         
@@ -154,13 +153,11 @@ struct BipartiteGraph {
                 path.push_back(path_head->parent_edge);
                 path_head = path_head->parent;
             }
-        } else { // find a good set
-            find_good_set(st, set);
         }
-        
     }
-        
-    TreeNode* bfs_step_even_level(SearchTree &st, std::unordered_set<int> &w_visited)
+
+    TreeNode* bfs_step_even_level(SearchTree *st,
+                                  std::unordered_set<int> &w_visited)
     {
         int v, w;
         int found = 0;
@@ -168,7 +165,7 @@ struct BipartiteGraph {
         TreeNode* path_head = nullptr;
         
         // Here all leafs are in V.
-        for (TreeNode* leaf : st.leafs) {
+        for (TreeNode* leaf : st->leafs) {
             v = leaf->idx;
             
             for (Edge* edge : V[v]) {
@@ -196,9 +193,9 @@ struct BipartiteGraph {
 
         if (!found) {
             // Update search tree leafs for next step.
-            st.leafs.clear();
+            st->leafs.clear();
             for (TreeNode* node : new_leafs) {
-                st.leafs.push_back(node);
+                st->leafs.push_back(node);
             }
             return nullptr;
         } else {
@@ -206,20 +203,20 @@ struct BipartiteGraph {
         }
     }
     
-    
-    TreeNode* bfs_step_odd_level(SearchTree &st, std::unordered_set<int> &v_visited)
+    TreeNode* bfs_step_odd_level(SearchTree *st,
+                                 std::unordered_set<int> &v_visited)
     {
         int v, w;
         std::vector<TreeNode*> new_leafs;
 
         // Here all leafs are in W.
-        for (TreeNode* leaf : st.leafs) {
+        for (TreeNode* leaf : st->leafs) {
             w = leaf->idx;
             
             for (Edge* edge : W[w]) {
                 v = edge->v;
 
-                // if matched, tight by definition
+                // If matched, tight by definition
                 if ((v_visited.find(v) == v_visited.end()) && v_matched[v]) {
                     // Add to a node in V to search tree.
                     TreeNode *new_node = new TreeNode(v);
@@ -233,27 +230,60 @@ struct BipartiteGraph {
         }
     
         // Update search tree leafs for next step.
-        st.leafs.clear();
+        st->leafs.clear();
         for (TreeNode* node : new_leafs) {
-            st.leafs.push_back(node);
+            st->leafs.push_back(node);
         }
         
         return nullptr;
     }
-    
-    
-    void find_good_set(SearchTree &st, std::vector<Edge*> &set)
+
+    void update_prices(std::unordered_set<int> &good_set,
+                       std::unordered_set<int> &neighb_good_set)
     {
+        // good_set -> in V, even levels
+        // neighb_good_set -> in W, odd levels
+        
+        std::cout << good_set.size() << " " << neighb_good_set.size() << "\n";
+
+        int delta = compute_update_delta();
+        
+        for (int v : good_set) {
+            v_prices[v] += delta;
+        }
+        
+        for (int w : neighb_good_set) {
+            w_prices[w] -= delta;
+        }
     }
-    
-    
+
+    int compute_update_delta() {
+        
+        return 0;
+    }
+
     int is_tight(Edge* edge) {
         return (edge->cost - v_prices[edge->v] - w_prices[edge->w] == 0);
     }
-    
-    
-    void update_prices(std::vector<Edge*> &set)
-    {
+
+    void print_graph() {
+        std::cout << "V:" << "\n";
+        for (int i = 0; i < V.size(); i++) {
+            std::cout << i << "-> ";
+            for (int j = 0; j < V[i].size(); j++) {
+                std::cout << "(" << V[i][j]->v << "," << V[i][j]->w << "," << V[i][j]->cost << "), ";
+            }
+            std::cout << "\n";
+        }
+
+        std::cout << "W:" << "\n";
+        for (int i = 0; i < W.size(); i++) {
+            std::cout << i << "-> ";
+            for (int j = 0; j < W[i].size(); j++) {
+                std::cout << "(" << W[i][j]->v << "," << W[i][j]->w << "," << W[i][j]->cost << "), ";
+            }
+            std::cout << "\n";
+        }
     }
     
 };

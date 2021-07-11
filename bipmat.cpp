@@ -53,24 +53,24 @@ void BipartiteMatcher::match()
     std::cout << "Num edges = " << graph->edges.size() << "\n";
     
     std::vector<Edge*> path;
-    std::vector<Edge*> set;
-    
-//    SearchTree* st = nullptr;
+    std::unordered_set<int> v_visited;
+    std::unordered_set<int> w_visited;
+    SearchTree *st = new SearchTree();
     
     while (M.size() != n) {  // if matching is not perferct
-        
+        // Clear everything for new search.
+        st->delete_nodes(st->root);
         path.clear();
-        set.clear();
-        
-        graph->search_good_path(path, set);
+        v_visited.clear();
+        w_visited.clear();
+                
+        graph->search_good_path(st, path, v_visited, w_visited);
         
         if (path.size() != 0) {  // found a good path
             augment(path);
         } else {
-            
-            graph->update_prices(set);
+            graph->update_prices(v_visited, w_visited);
         }
-        
     }
 
 }
