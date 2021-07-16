@@ -8,31 +8,75 @@
 
 namespace wbm {
 
-BipartiteMatcher::BipartiteMatcher(std::string input_path)
+    
+BipartiteMatcher::BipartiteMatcher(std::string input_path, std::string format)
+{
+    if (format == "edges") {
+        read_edges(input_path);
+    } else if (format == "matrix") {
+        read_cost_matrix(input_path);
+    } else {
+        std::cout << "Invalid input format name. \n";
+        exit(1);
+    }
+}
+    
+void BipartiteMatcher::read_cost_matrix(std::string input_path)
 {
     std::ifstream input(input_path);
     std::string line;
     int val;
-    n = 0;
     
-    while (getline(input, line))
-    {
+    // Read problem size.
+    getline(input, line);
+    std::istringstream(line) >> this->n;
+    graph = new BipartiteGraph(this->n);
+    
+    while (getline(input, line)) {
         std::vector<int> row;
         std::istringstream ss(line);
     
         while (ss >> val) {
             row.push_back(val);
         }
-        
-        if (n == 0) {
-            n = int(row.size());
-        } else {
-            assert(n == row.size());
-        }
-        
+        assert(int(row.size()) == row.size());
         costs.push_back(row);
     }
     
+    // Add edges.
+    for (int v = 0; v < n; v++) {
+        for (int w = 0; w < n; w++) {
+            graph->add_edge(v, w, costs[v][w]);
+        }
+    }
+}
+    
+
+void BipartiteMatcher::read_edges(std::string input_path)
+{
+    std::ifstream input(input_path);
+    std::string line;
+    int val;
+    
+    // Read problem size.
+    getline(input, line);
+    std::istringstream(line) >> this->n;
+    
+    // Initialize graph once we have the problem size.
+    graph = new BipartiteGraph(n);
+
+    // Read all edges.
+    while (getline(input, line))
+    {
+        std::vector<int> row;
+        std::istringstream ss(line);
+        
+        while (ss >> val) {
+            row.push_back(val);
+        }
+        
+        graph->add_edge(row[0], row[1], row[2]);
+    }
 }
 
     
@@ -94,10 +138,12 @@ void BipartiteMatcher::match()
         }
     }
 
-    
+    int sum = 0;
     for (Edge* e : M) {
         std::cout << e->v << " " << e->w << " " << e->cost << "\n";
+        sum += e->cost;
     }
+    std::cout << "min cost = " << sum << "\n";
 }
 
 
