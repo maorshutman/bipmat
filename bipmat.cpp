@@ -59,7 +59,28 @@ void BipartiteMatcher::match()
     
     while (M.size() != n) {  // if matching is not perferct
         // Clear everything for new search.
-        st->delete_nodes(st->root);
+        
+        // DEBUG
+        std::cout << "pv: ";
+        for (int p : graph->v_prices) { std::cout << p << " "; }
+        std::cout << "\n";
+        
+        std::cout << "pw: ";
+        for (int p : graph->w_prices) { std::cout << p << " "; }
+        std::cout << "\n";
+        
+        std::cout << "M: ";
+        for (Edge* e : M) {
+            std::cout << "(" << e->v << "," << e->w << "," << e->cost << "), ";
+        }
+        std::cout << "\n";
+        
+        graph->print_graph();
+        
+//        st->delete_nodes(st->root);
+//        st->leafs.clear();
+        st->clear();
+        
         path.clear();
         v_visited.clear();
         w_visited.clear();
@@ -73,6 +94,10 @@ void BipartiteMatcher::match()
         }
     }
 
+    
+    for (Edge* e : M) {
+        std::cout << e->v << " " << e->w << " " << e->cost << "\n";
+    }
 }
 
 

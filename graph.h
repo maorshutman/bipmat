@@ -22,7 +22,8 @@ struct TreeNode {
     TreeNode *parent;
     Edge *parent_edge;
     std::vector<TreeNode*> children;
-
+    char side;
+    
     TreeNode(int idx) {
         this->idx = idx;
         parent = nullptr;
@@ -50,6 +51,7 @@ struct SearchTree {
         
     void set_root(int k) {
         root = new TreeNode(k);
+        root->side = 'V';
         leafs.push_back(root);
     }
     
@@ -59,6 +61,28 @@ struct SearchTree {
             delete_nodes(nd);
         }
         delete node;
+    }
+    
+    void clear() {
+        delete_nodes(root);
+        leafs.clear();
+    }
+    
+    // TODO: Only for debug, replace by inceremetal changes.
+    void update_leafs() {
+        leafs.clear();
+        search_leafs(root);
+    }
+    
+    void search_leafs(TreeNode* node) {
+        if (!node) { return; }
+        if (node->children.size() == 0) {
+            leafs.push_back(node);
+        } else {
+            for (TreeNode* nd : node->children) {
+                search_leafs(nd);
+            }
+        }
     }
 };
 
@@ -105,9 +129,7 @@ struct BipartiteGraph {
                           std::unordered_set<int> &v_visited,
                           std::unordered_set<int> &w_visited)
     {
-        
-        size_t prev_num_visited_vs = 0;
-        size_t prev_num_visited_ws = 0;
+                
         int stuck = 0;
         
         // Find a vertex in V to start with.
@@ -120,30 +142,39 @@ struct BipartiteGraph {
         }
         // No good path, since there are no unmatches v's.
         if (r == -1) { return; }
+        std::cout << "chosen r = " << r << "\n";
+        
         
         // TODO: If updated the prices, can continue with the same tree, and save work ?
         st->set_root(r);
         TreeNode* path_head = nullptr;
         v_visited.insert(r);
         
-        int level_even = 0;
+        size_t prev_num_visited_vs = v_visited.size();
+        size_t prev_num_visited_ws = w_visited.size();
+        
+        int level_even = 1;
         
         while (!stuck) {
+            
+            st->update_leafs();
+            
             if (level_even) { // next level is odd
                 path_head = bfs_step_even_level(st, w_visited);
                 if (path_head) { break; }
+        
+                // Check if stuck.
+                if (prev_num_visited_ws == w_visited.size()) { stuck = 1; }
+                prev_num_visited_ws = w_visited.size();
+                
             } else { // next level is even
                 bfs_step_odd_level(st, v_visited);
+                
+                // Check if stuck.
+                if (prev_num_visited_vs == v_visited.size()) { stuck = 1; }
+                prev_num_visited_vs = v_visited.size();
             }
-            
-            // Check if search is stuck.
-            if ((prev_num_visited_vs == v_visited.size()) &&
-                (prev_num_visited_ws == w_visited.size())) {
-                stuck = 1;
-            }
-            prev_num_visited_vs = v_visited.size();
-            prev_num_visited_ws = w_visited.size();
-            
+                        
             level_even ^= 1;
         }
 
@@ -165,51 +196,46 @@ struct BipartiteGraph {
         TreeNode* path_head = nullptr;
         
         // Here all leafs are in V.
+        st->update_leafs();
+        
         for (TreeNode* leaf : st->leafs) {
             v = leaf->idx;
             
             for (Edge* edge : V[v]) {
                 w = edge->w;
-
+                
+                std::cout << "tight ?" << is_tight(edge) << "\n";
+                
                 if (is_tight(edge) && (w_visited.find(w) == w_visited.end())) {
                     // Add to a node in W to search tree.
                     TreeNode *new_node = new TreeNode(w);
                     new_node->parent_edge = edge;
+                    new_node->side = 'W';
                     leaf->add_child(new_node);
-                    new_leafs.push_back(new_node);
                     
                     w_visited.insert(w);
                     
+                    // Found a good path.
                     if (!w_matched[w]) {
-                        // Found a good path.
                         found = 1;
                         path_head = new_node;
                         break;
                     }
                 }
-                
             }
         }
-
-        if (!found) {
-            // Update search tree leafs for next step.
-            st->leafs.clear();
-            for (TreeNode* node : new_leafs) {
-                st->leafs.push_back(node);
-            }
-            return nullptr;
-        } else {
-            return path_head;
-        }
+        
+        return path_head;
     }
     
     TreeNode* bfs_step_odd_level(SearchTree *st,
                                  std::unordered_set<int> &v_visited)
     {
         int v, w;
-        std::vector<TreeNode*> new_leafs;
 
         // Here all leafs are in W.
+        st->update_leafs();
+        
         for (TreeNode* leaf : st->leafs) {
             w = leaf->idx;
             
@@ -221,20 +247,14 @@ struct BipartiteGraph {
                     // Add to a node in V to search tree.
                     TreeNode *new_node = new TreeNode(v);
                     new_node->parent_edge = edge;
+                    new_node->side = 'V';
                     leaf->add_child(new_node);
-                    new_leafs.push_back(new_node);
                     
                     v_visited.insert(v);
                 }
             }
         }
-    
-        // Update search tree leafs for next step.
-        st->leafs.clear();
-        for (TreeNode* node : new_leafs) {
-            st->leafs.push_back(node);
-        }
-        
+
         return nullptr;
     }
 
@@ -246,24 +266,42 @@ struct BipartiteGraph {
         
         std::cout << good_set.size() << " " << neighb_good_set.size() << "\n";
 
-        int delta = compute_update_delta();
-        
+        // v in S, w not in N(S). Maximal delta that zeros one of these edges.
+        // TODO
+        int delta = 1e9;
+        int rc;
+        for (int v : good_set) {  // v in S
+            for (Edge* edge : V[v]) {
+                if (neighb_good_set.find(edge->w) == neighb_good_set.end()) {  // w not in N(S)
+                    rc = reduced_cost(edge);
+                    if (rc < delta) { delta = rc; }
+                }
+            }
+        }
+                
         for (int v : good_set) {
             v_prices[v] += delta;
         }
-        
         for (int w : neighb_good_set) {
             w_prices[w] -= delta;
         }
+        
+//        // TODO: debug
+//        print_graph();
     }
 
     int compute_update_delta() {
-        
+        // v in S, w not in N(S). Maximal delta that zeros one of these edges.
+                
         return 0;
     }
 
+    inline int reduced_cost(Edge* edge) {
+        return edge->cost - v_prices[edge->v] - w_prices[edge->w];
+    }
+    
     int is_tight(Edge* edge) {
-        return (edge->cost - v_prices[edge->v] - w_prices[edge->w] == 0);
+        return reduced_cost(edge) == 0;
     }
 
     void print_graph() {
@@ -271,7 +309,7 @@ struct BipartiteGraph {
         for (int i = 0; i < V.size(); i++) {
             std::cout << i << "-> ";
             for (int j = 0; j < V[i].size(); j++) {
-                std::cout << "(" << V[i][j]->v << "," << V[i][j]->w << "," << V[i][j]->cost << "), ";
+                std::cout << "(" << V[i][j]->v << "," << V[i][j]->w << "," << V[i][j]->cost << "," <<  reduced_cost(V[i][j]) << "), ";
             }
             std::cout << "\n";
         }
@@ -280,7 +318,7 @@ struct BipartiteGraph {
         for (int i = 0; i < W.size(); i++) {
             std::cout << i << "-> ";
             for (int j = 0; j < W[i].size(); j++) {
-                std::cout << "(" << W[i][j]->v << "," << W[i][j]->w << "," << W[i][j]->cost << "), ";
+                std::cout << "(" << W[i][j]->v << "," << W[i][j]->w << "," << W[i][j]->cost << "," <<  reduced_cost(W[i][j]) << "), ";
             }
             std::cout << "\n";
         }
