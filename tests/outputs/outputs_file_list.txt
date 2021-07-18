@@ -1,0 +1,10 @@
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_0.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_1.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_2.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_3.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_4.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_5.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_6.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_7.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_8.txt
+/Users/maorshutman/repos/bipmat/tests/outputs/edges_2x2_output_9.txt

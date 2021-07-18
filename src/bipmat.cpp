@@ -143,6 +143,8 @@ void BipartiteMatcher::match()
         std::cout << e->v << " " << e->w << " " << e->cost << "\n";
         sum += e->cost;
     }
+    
+    min_cost = sum;
     std::cout << "min cost = " << sum << "\n";
 }
 

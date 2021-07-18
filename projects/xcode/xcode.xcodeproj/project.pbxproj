@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36557A3326920C5E00DBC5E3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3126920C5E00DBC5E3 /* main.cpp */; };
-		36557A3426920C5E00DBC5E3 /* bipmat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3226920C5E00DBC5E3 /* bipmat.cpp */; };
+		36557A3C26A18DC600DBC5E3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3826A18DC600DBC5E3 /* main.cpp */; };
+		36557A3D26A18DC600DBC5E3 /* bipmat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3926A18DC600DBC5E3 /* bipmat.cpp */; };
+		36557A4026A4708F00DBC5E3 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3E26A4708F00DBC5E3 /* test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +26,12 @@
 
 /* Begin PBXFileReference section */
 		36557A2626920C2000DBC5E3 /* xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcode; sourceTree = BUILT_PRODUCTS_DIR; };
-		36557A3026920C5D00DBC5E3 /* bipmat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bipmat.h; path = ../../../bipmat.h; sourceTree = "<group>"; };
-		36557A3126920C5E00DBC5E3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../main.cpp; sourceTree = "<group>"; };
-		36557A3226920C5E00DBC5E3 /* bipmat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bipmat.cpp; path = ../../../bipmat.cpp; sourceTree = "<group>"; };
-		36557A37269848E400DBC5E3 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graph.h; path = ../../../graph.h; sourceTree = "<group>"; };
+		36557A3826A18DC600DBC5E3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../src/main.cpp; sourceTree = "<group>"; };
+		36557A3926A18DC600DBC5E3 /* bipmat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bipmat.cpp; path = ../../../src/bipmat.cpp; sourceTree = "<group>"; };
+		36557A3A26A18DC600DBC5E3 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graph.h; path = ../../../src/graph.h; sourceTree = "<group>"; };
+		36557A3B26A18DC600DBC5E3 /* bipmat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bipmat.h; path = ../../../src/bipmat.h; sourceTree = "<group>"; };
+		36557A3E26A4708F00DBC5E3 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = ../../../tests/test.cpp; sourceTree = "<group>"; };
+		36557A3F26A4708F00DBC5E3 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test.h; path = ../../../tests/test.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,10 +64,12 @@
 		36557A2826920C2000DBC5E3 /* xcode */ = {
 			isa = PBXGroup;
 			children = (
-				36557A37269848E400DBC5E3 /* graph.h */,
-				36557A3126920C5E00DBC5E3 /* main.cpp */,
-				36557A3226920C5E00DBC5E3 /* bipmat.cpp */,
-				36557A3026920C5D00DBC5E3 /* bipmat.h */,
+				36557A3E26A4708F00DBC5E3 /* test.cpp */,
+				36557A3F26A4708F00DBC5E3 /* test.h */,
+				36557A3926A18DC600DBC5E3 /* bipmat.cpp */,
+				36557A3B26A18DC600DBC5E3 /* bipmat.h */,
+				36557A3A26A18DC600DBC5E3 /* graph.h */,
+				36557A3826A18DC600DBC5E3 /* main.cpp */,
 			);
 			path = xcode;
 			sourceTree = "<group>";
@@ -126,8 +131,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36557A3426920C5E00DBC5E3 /* bipmat.cpp in Sources */,
-				36557A3326920C5E00DBC5E3 /* main.cpp in Sources */,
+				36557A3D26A18DC600DBC5E3 /* bipmat.cpp in Sources */,
+				36557A3C26A18DC600DBC5E3 /* main.cpp in Sources */,
+				36557A4026A4708F00DBC5E3 /* test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
