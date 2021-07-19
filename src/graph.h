@@ -52,20 +52,23 @@ struct SearchTree {
         
     void set_root(int k) {
         root = new TreeNode(k);
-        root->side = 'V';
+        root->side = 'V'; // TODO: Remove.
         leafs.push_back(root);
     }
     
     void delete_nodes(TreeNode *node) {
-        if (!node) { return; }
+        if (!node) {
+            return;
+        }
         for (TreeNode* nd : node->children) {
             delete_nodes(nd);
         }
-        delete node;
+        delete node;        
     }
     
     void clear() {
         delete_nodes(root);
+        root = nullptr;
         leafs.clear();
     }
     
@@ -76,7 +79,9 @@ struct SearchTree {
     }
     
     void search_leafs(TreeNode* node) {
-        if (!node) { return; }
+        if (!node) {
+            return;
+        }
         if (node->children.size() == 0) {
             leafs.push_back(node);
         } else {
@@ -116,7 +121,11 @@ struct BipartiteGraph {
         this->n = n;
     }
 
-    ~BipartiteGraph() {}
+    ~BipartiteGraph() {
+        for (auto edge : edges) {
+            delete edge;
+        }
+    }
 
     void add_edge(int v, int w, int cost) {
         Edge* edge = new Edge(v, w, cost);
@@ -125,7 +134,8 @@ struct BipartiteGraph {
         W[w].push_back(edge);
     }
 
-    void search_good_path(SearchTree *st,
+    void search_good_path(std::unordered_set<Edge*> M,
+                          SearchTree *st,
                           std::vector<Edge*> &path,
                           std::unordered_set<int> &v_visited,
                           std::unordered_set<int> &w_visited)
@@ -169,7 +179,7 @@ struct BipartiteGraph {
                 prev_num_visited_ws = w_visited.size();
                 
             } else { // next level is even
-                bfs_step_odd_level(st, v_visited);
+                bfs_step_odd_level(st, v_visited, M);
                 
                 // Check if stuck.
                 if (prev_num_visited_vs == v_visited.size()) { stuck = 1; }
@@ -205,7 +215,7 @@ struct BipartiteGraph {
             for (Edge* edge : V[v]) {
                 w = edge->w;
                 
-                std::cout << "tight ?" << is_tight(edge) << "\n";
+//                std::cout << "tight ?" << is_tight(edge) << "\n";
                 
                 if (is_tight(edge) && (w_visited.find(w) == w_visited.end())) {
                     // Add to a node in W to search tree.
@@ -230,7 +240,8 @@ struct BipartiteGraph {
     }
     
     TreeNode* bfs_step_odd_level(SearchTree *st,
-                                 std::unordered_set<int> &v_visited)
+                                 std::unordered_set<int> &v_visited,
+                                 std::unordered_set<Edge*> M)
     {
         int v, w;
 
@@ -244,7 +255,7 @@ struct BipartiteGraph {
                 v = edge->v;
 
                 // If matched, tight by definition
-                if ((v_visited.find(v) == v_visited.end()) && v_matched[v]) {
+                if ((v_visited.find(v) == v_visited.end()) && (M.find(edge) != M.end())) {
                     // Add to a node in V to search tree.
                     TreeNode *new_node = new TreeNode(v);
                     new_node->parent_edge = edge;

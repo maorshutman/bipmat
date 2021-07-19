@@ -13,6 +13,7 @@ namespace wbm { class BipartiteMatcher {
         BipartiteGraph* graph;
         std::unordered_set<Edge*> M;
         int min_cost;
+        
         void augment(std::vector<Edge*> &path);
         
     public:

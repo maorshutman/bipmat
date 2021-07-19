@@ -37,6 +37,10 @@ void test()
 
         std::cout << "correct = " << min_cost << ", " << matcher.get_min_cost() << std::endl;
         
+        if (min_cost != matcher.get_min_cost()) {
+            exit(1);
+        }
+        
     }
     
     std::cout << "-> done" << "\n";

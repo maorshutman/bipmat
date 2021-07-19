@@ -9,7 +9,7 @@ from scipy.optimize import linear_sum_assignment
 
 def save_test_files(
     input_file_path,
-    output_file_path,
+    output_file_path,    
     fmt, 
     min_cost, 
     time_to_solve,
@@ -49,17 +49,16 @@ def save_test_files(
 def generate_test_files(
     inputs_dir, 
     outputs_dir, 
+    input_file_paths, 
+    output_file_paths,
     num_tests, 
     fmt, 
     rows, 
     cols
 ):
-    
-    input_file_paths = []
-    output_file_paths = []
 
     for i in range(num_tests):
-        costs = np.random.randint(low=0, high=100, size=(rows, cols))
+        costs = np.random.randint(low=0, high=15, size=(rows, cols))
         
         t0 = time.time()
         row_ind, col_ind = linear_sum_assignment(costs)
@@ -74,14 +73,6 @@ def generate_test_files(
 
         save_test_files(input_file_path, output_file_path, fmt, min_cost, time_to_solve, rows, cols, costs)
 
-    with open(os.path.join(inputs_dir, "inputs_file_list.txt"), "w") as f:
-        for path in input_file_paths:
-            f.write(path + "\n")   
-
-    with open(os.path.join(outputs_dir, "outputs_file_list.txt"), "w") as f:
-        for path in output_file_paths:
-            f.write(path + "\n")   
-
 
 def main():
     random.seed(10)
@@ -91,12 +82,22 @@ def main():
     inputs_dir = "/Users/maorshutman/repos/bipmat/tests/inputs"
     outputs_dir = "/Users/maorshutman/repos/bipmat/tests/outputs"
 
-    generate_test_files(inputs_dir, outputs_dir, 10, "edges", 2, 2)
-    # generate_test_files(inputs_dir, outputs_dir, 2, "edges", 3, 3)
-    # generate_test_files(inputs_dir, outputs_dir, 2, "edges", 5, 5)
-    # generate_test_files(inputs_dir, outputs_dir, 2, "edges", 10, 10)
-    # generate_test_files(inputs_dir, outputs_dir, 2, "edges", 15, 15)
+    input_file_paths = []
+    output_file_paths = []
 
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 2, 2)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 3, 3)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 4, 4)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 5, 5)
+    
+
+    with open(os.path.join(inputs_dir, "inputs_file_list.txt"), "w") as f:
+        for path in input_file_paths:
+            f.write(path + "\n")   
+
+    with open(os.path.join(outputs_dir, "outputs_file_list.txt"), "w") as f:
+        for path in output_file_paths:
+            f.write(path + "\n")   
 
 
 if __name__ == "__main__":
