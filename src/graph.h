@@ -7,6 +7,9 @@
 #include <unordered_set>
 #include <queue>
 
+#define SIDE_V 0
+#define SIDE_W 1
+
 
 struct Edge {
     int v;
@@ -23,7 +26,7 @@ struct TreeNode {
     TreeNode *parent;
     Edge *parent_edge;
     std::vector<TreeNode*> children;
-    char side;
+    unsigned char side;
     
     TreeNode(int idx) {
         this->idx = idx;
@@ -42,7 +45,7 @@ struct TreeNode {
 
 struct SearchTree {
     TreeNode *root;
-    std::vector<TreeNode*> leafs;
+    std::unordered_set<TreeNode*> leafs;
     
     SearchTree() {}
     
@@ -52,8 +55,8 @@ struct SearchTree {
         
     void set_root(int k) {
         root = new TreeNode(k);
-        root->side = 'V'; // TODO: Remove.
-        leafs.push_back(root);
+        root->side = SIDE_V;
+        leafs.insert(root);
     }
     
     void delete_nodes(TreeNode *node) {
@@ -71,24 +74,12 @@ struct SearchTree {
         root = nullptr;
         leafs.clear();
     }
-    
-    // TODO: Only for debug, replace by inceremetal changes.
-    void update_leafs() {
-        leafs.clear();
-        search_leafs(root);
-    }
-    
-    void search_leafs(TreeNode* node) {
-        if (!node) {
-            return;
+        
+    void add_leaf(TreeNode* parent, TreeNode* leaf) {
+        if (leafs.find(parent) != leafs.end()) {
+            leafs.erase(parent);
         }
-        if (node->children.size() == 0) {
-            leafs.push_back(node);
-        } else {
-            for (TreeNode* nd : node->children) {
-                search_leafs(nd);
-            }
-        }
+        leafs.insert(leaf);
     }
 };
 
@@ -152,8 +143,10 @@ struct BipartiteGraph {
             }
         }
         // No good path, since there are no unmatches v's.
-        if (r == -1) { return; }
-        std::cout << "chosen r = " << r << "\n";
+        if (r == -1) {
+            return;
+        }
+//        std::cout << "chosen r = " << r << "\n";
         
         
         // TODO: If updated the prices, can continue with the same tree, and save work ?
@@ -167,22 +160,21 @@ struct BipartiteGraph {
         int level_even = 1;
         
         while (!stuck) {
-            
-            st->update_leafs();
-            
             if (level_even) { // next level is odd
                 path_head = bfs_step_even_level(st, w_visited);
                 if (path_head) { break; }
         
-                // Check if stuck.
-                if (prev_num_visited_ws == w_visited.size()) { stuck = 1; }
+                if (prev_num_visited_ws == w_visited.size()) {
+                    stuck = 1;
+                }
                 prev_num_visited_ws = w_visited.size();
                 
             } else { // next level is even
                 bfs_step_odd_level(st, v_visited, M);
                 
-                // Check if stuck.
-                if (prev_num_visited_vs == v_visited.size()) { stuck = 1; }
+                if (prev_num_visited_vs == v_visited.size()) {
+                    stuck = 1;
+                }
                 prev_num_visited_vs = v_visited.size();
             }
                         
@@ -203,13 +195,16 @@ struct BipartiteGraph {
     {
         int v, w;
         int found = 0;
-        std::vector<TreeNode*> new_leafs;
         TreeNode* path_head = nullptr;
+                
+        auto leafs_cp = st->leafs;
         
-        // Here all leafs are in V.
-        st->update_leafs();
-        
-        for (TreeNode* leaf : st->leafs) {
+        for (TreeNode* leaf : leafs_cp) {
+            
+            if (leaf->side != SIDE_V) {
+                continue;
+            }
+            
             v = leaf->idx;
             
             for (Edge* edge : V[v]) {
@@ -221,8 +216,10 @@ struct BipartiteGraph {
                     // Add to a node in W to search tree.
                     TreeNode *new_node = new TreeNode(w);
                     new_node->parent_edge = edge;
-                    new_node->side = 'W';
+                    new_node->side = SIDE_W;
                     leaf->add_child(new_node);
+                    
+                    st->add_leaf(leaf, new_node);
                     
                     w_visited.insert(w);
                     
@@ -244,23 +241,35 @@ struct BipartiteGraph {
                                  std::unordered_set<Edge*> M)
     {
         int v, w;
-
-        // Here all leafs are in W.
-        st->update_leafs();
         
-        for (TreeNode* leaf : st->leafs) {
+        auto leafs_cp = st->leafs;
+        
+        for (TreeNode* leaf : leafs_cp) {
             w = leaf->idx;
+
+            if (leaf->side != SIDE_W) {
+                continue;
+            }
             
             for (Edge* edge : W[w]) {
                 v = edge->v;
 
                 // If matched, tight by definition
+                
+                
                 if ((v_visited.find(v) == v_visited.end()) && (M.find(edge) != M.end())) {
+                    // TODO: debug
+                    if (!is_tight(edge)) {
+                        exit(1);
+                    }
+                    
                     // Add to a node in V to search tree.
                     TreeNode *new_node = new TreeNode(v);
                     new_node->parent_edge = edge;
-                    new_node->side = 'V';
+                    new_node->side = SIDE_V;
                     leaf->add_child(new_node);
+                    
+                    st->add_leaf(leaf, new_node);
                     
                     v_visited.insert(v);
                 }
@@ -276,17 +285,20 @@ struct BipartiteGraph {
         // good_set -> in V, even levels
         // neighb_good_set -> in W, odd levels
         
-        std::cout << good_set.size() << " " << neighb_good_set.size() << "\n";
+//        std::cout << good_set.size() << " " << neighb_good_set.size() << "\n";
 
         // v in S, w not in N(S). Maximal delta that zeros one of these edges.
-        // TODO
+        // TODO: How to init ?
         int delta = 1e9;
         int rc;
-        for (int v : good_set) {  // v in S
+        for (int v : good_set) {  // v is in S
             for (Edge* edge : V[v]) {
-                if (neighb_good_set.find(edge->w) == neighb_good_set.end()) {  // w not in N(S)
+                // If w is not in N(S)
+                if (neighb_good_set.find(edge->w) == neighb_good_set.end()) {
                     rc = reduced_cost(edge);
-                    if (rc < delta) { delta = rc; }
+                    if (rc < delta) {
+                        delta = rc;
+                    }
                 }
             }
         }
@@ -297,14 +309,11 @@ struct BipartiteGraph {
         for (int w : neighb_good_set) {
             w_prices[w] -= delta;
         }
-        
-//        // TODO: debug
-//        print_graph();
     }
 
     int compute_update_delta() {
         // v in S, w not in N(S). Maximal delta that zeros one of these edges.
-                
+        // TODO:
         return 0;
     }
 

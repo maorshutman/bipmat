@@ -105,16 +105,25 @@ BipartiteMatcher::~BipartiteMatcher()
     
 void BipartiteMatcher::match()
 {
-    graph->print_graph();
+//    graph->print_graph();
     std::cout << "Num edges = " << graph->edges.size() << "\n";
     
     std::vector<Edge*> path;
     std::unordered_set<int> v_visited;
     std::unordered_set<int> w_visited;
+    
     SearchTree *st = new SearchTree();
     st->set_root(0);
     
     while (M.size() != n) {  // if matching is not perferct
+        
+        // TODO: Debug
+        for (auto e : M) {
+            if (!graph->is_tight(e)) {
+                exit(1);
+            }
+        }
+        
         // Clear everything for new search.
         
         // DEBUG

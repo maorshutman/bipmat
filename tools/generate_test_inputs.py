@@ -37,14 +37,6 @@ def save_test_files(
         f.write(str(min_cost) + "\n")
         f.write(str(time_to_solve) + "\n")
 
-    # solution = {
-    #     "time_to_solve": time_to_solve,
-    #     "min_cost": float(min_cost),
-    # }
-
-    # with open(output_file_path, 'w') as f:
-    #     json.dump(solution, f, indent=2)
-
 
 def generate_test_files(
     inputs_dir, 
@@ -58,7 +50,7 @@ def generate_test_files(
 ):
 
     for i in range(num_tests):
-        costs = np.random.randint(low=0, high=15, size=(rows, cols))
+        costs = np.random.randint(low=1, high=rows, size=(rows, cols))
         
         t0 = time.time()
         row_ind, col_ind = linear_sum_assignment(costs)
@@ -89,7 +81,13 @@ def main():
     generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 3, 3)
     generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 4, 4)
     generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 5, 5)
-    
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 7, 7)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 10, 10)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 20, 20)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 50, 50)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 200, 200)
+    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 500, 500)
+
 
     with open(os.path.join(inputs_dir, "inputs_file_list.txt"), "w") as f:
         for path in input_file_paths:

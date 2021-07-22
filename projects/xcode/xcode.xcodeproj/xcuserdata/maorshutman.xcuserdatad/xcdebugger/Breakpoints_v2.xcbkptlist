@@ -856,7 +856,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D9BDCE19-C197-4336-A9E7-95B8E33A2F05"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../tests/test.cpp"
@@ -1166,8 +1166,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "delete_nodes(node)"
             landmarkType = "7">
             <Locations>
@@ -1214,8 +1214,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "clear()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1230,8 +1230,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "~SearchTree()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1246,8 +1246,8 @@
             filePath = "../../src/bipmat.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "BipartiteMatcher::match()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1262,8 +1262,8 @@
             filePath = "../../src/bipmat.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "BipartiteMatcher::match()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1278,8 +1278,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1294,8 +1294,8 @@
             filePath = "../../src/bipmat.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "BipartiteMatcher::match()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1304,14 +1304,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7C8FC5AD-F661-4117-9B4E-C362886751A6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1320,14 +1320,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "49BE66E1-7756-4EA0-B194-CB238AA9D17D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "update_prices(good_set, neighb_good_set)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1342,8 +1342,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "bfs_step_even_level(st, w_visited)"
             landmarkType = "7">
             <Locations>
@@ -1358,8 +1358,8 @@
                   urlString = "file:///Users/maorshutman/repos/bipmat/src/graph.h"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
                   offsetFromSymbolStart = "72">
                </Location>
                <Location
@@ -1373,9 +1373,9 @@
                   urlString = "file:///Users/maorshutman/repos/bipmat/src/graph.h"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
-                  offsetFromSymbolStart = "138">
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "153">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1390,40 +1390,40 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "bfs_step_odd_level(st, v_visited, M)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D63E778D-EFE5-453E-B30C-F598AD9DD433 - e82acf3bd39efde"
+                  uuid = "D63E778D-EFE5-453E-B30C-F598AD9DD433 - 3f89844db6fe2b54"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BipartiteGraph::bfs_step_odd_level(SearchTree*, std::__1::unordered_set&lt;int, std::__1::hash&lt;int&gt;, std::__1::equal_to&lt;int&gt;, std::__1::allocator&lt;int&gt; &gt;&amp;)"
+                  symbolName = "BipartiteGraph::bfs_step_odd_level(SearchTree*, std::__1::unordered_set&lt;int, std::__1::hash&lt;int&gt;, std::__1::equal_to&lt;int&gt;, std::__1::allocator&lt;int&gt; &gt;&amp;, std::__1::unordered_set&lt;Edge*, std::__1::hash&lt;Edge*&gt;, std::__1::equal_to&lt;Edge*&gt;, std::__1::allocator&lt;Edge*&gt; &gt;)"
                   moduleName = "xcode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/maorshutman/repos/bipmat/src/graph.h"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "43">
+                  startingLineNumber = "239"
+                  endingLineNumber = "239"
+                  offsetFromSymbolStart = "64">
                </Location>
                <Location
-                  uuid = "D63E778D-EFE5-453E-B30C-F598AD9DD433 - e82acf3bd39efde"
+                  uuid = "D63E778D-EFE5-453E-B30C-F598AD9DD433 - 3f89844db6fe2b54"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BipartiteGraph::bfs_step_odd_level(SearchTree*, std::__1::unordered_set&lt;int, std::__1::hash&lt;int&gt;, std::__1::equal_to&lt;int&gt;, std::__1::allocator&lt;int&gt; &gt;&amp;)"
+                  symbolName = "BipartiteGraph::bfs_step_odd_level(SearchTree*, std::__1::unordered_set&lt;int, std::__1::hash&lt;int&gt;, std::__1::equal_to&lt;int&gt;, std::__1::allocator&lt;int&gt; &gt;&amp;, std::__1::unordered_set&lt;Edge*, std::__1::hash&lt;Edge*&gt;, std::__1::equal_to&lt;Edge*&gt;, std::__1::allocator&lt;Edge*&gt; &gt;)"
                   moduleName = "xcode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/maorshutman/repos/bipmat/src/graph.h"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "109">
+                  startingLineNumber = "239"
+                  endingLineNumber = "239"
+                  offsetFromSymbolStart = "145">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1438,8 +1438,8 @@
             filePath = "../../src/bipmat.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "BipartiteMatcher::augment(path)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1454,8 +1454,8 @@
             filePath = "../../src/bipmat.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "BipartiteMatcher::augment(path)"
             landmarkType = "7">
             <Locations>
@@ -1502,8 +1502,8 @@
             filePath = "../../src/bipmat.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "BipartiteMatcher::augment(path)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1518,8 +1518,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "update_prices(good_set, neighb_good_set)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1534,8 +1534,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "update_prices(good_set, neighb_good_set)"
             landmarkType = "7">
             <Locations>
@@ -1575,22 +1575,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3934C668-A906-498B-99EC-53AF8C6A3BDD"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../src/graph.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
-            landmarkName = "update_prices(good_set, neighb_good_set)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C4A77E95-378F-44E7-8A49-D7BDA934291A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1598,8 +1582,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "update_prices(good_set, neighb_good_set)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1614,8 +1598,8 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "update_prices(good_set, neighb_good_set)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1630,9 +1614,185 @@
             filePath = "../../src/graph.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "update_prices(good_set, neighb_good_set)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E67CF7C-E6D1-4A05-AB4B-7A23A8FB6C90"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/bipmat.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "BipartiteMatcher::augment(path)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54E6B124-D480-4C4F-9AD1-FAAEE6674E4A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "add_leaf(parent, leaf)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8DCAEE83-F293-49EC-8524-28AA70DE22C5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3768FD12-B863-4603-9141-6731C1229D7A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19A8F47C-3849-4B46-83D4-ABC7E9122955"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "bfs_step_odd_level(st, v_visited, M)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C879EE3C-6290-434C-9B62-C314C26479F6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE43E9F7-7700-44DC-9047-84AB0FD4CCD5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9042297B-4933-462E-AF60-FC6ED3DC1BBD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "bfs_step_even_level(st, w_visited)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8B3F9A9E-D1B7-4B85-AB61-57A8BDA36965"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "bfs_step_odd_level(st, v_visited, M)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "588E0284-0D81-42F9-AF39-515F5CAA1B6D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "bfs_step_even_level(st, w_visited)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "55BBF272-81F0-4454-AE6F-FFD100D31D89"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../src/graph.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "search_good_path(M, st, path, v_visited, w_visited)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
