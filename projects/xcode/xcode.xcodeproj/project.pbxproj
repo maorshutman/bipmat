@@ -32,6 +32,8 @@
 		36557A3B26A18DC600DBC5E3 /* bipmat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bipmat.h; path = ../../../src/bipmat.h; sourceTree = "<group>"; };
 		36557A3E26A4708F00DBC5E3 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = ../../../tests/test.cpp; sourceTree = "<group>"; };
 		36557A3F26A4708F00DBC5E3 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test.h; path = ../../../tests/test.h; sourceTree = "<group>"; };
+		36557A4126A9868200DBC5E3 /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = time.h; path = ../../../tests/time.h; sourceTree = "<group>"; };
+		36A4AA5C26ADCB070000B94B /* vector_set_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector_set_t.h; path = ../../../src/vector_set_t.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,8 @@
 		36557A2826920C2000DBC5E3 /* xcode */ = {
 			isa = PBXGroup;
 			children = (
+				36A4AA5C26ADCB070000B94B /* vector_set_t.h */,
+				36557A4126A9868200DBC5E3 /* time.h */,
 				36557A3E26A4708F00DBC5E3 /* test.cpp */,
 				36557A3F26A4708F00DBC5E3 /* test.h */,
 				36557A3926A18DC600DBC5E3 /* bipmat.cpp */,
@@ -261,6 +265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

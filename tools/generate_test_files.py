@@ -77,16 +77,22 @@ def main():
     input_file_paths = []
     output_file_paths = []
 
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 2, 2)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 3, 3)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 4, 4)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 5, 5)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 7, 7)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 10, 10)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 20, 20)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 50, 50)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 200, 200)
-    generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 500, 500)
+    prob_sizes = [int(2 * (1.08**i)) for i in range(1, 84)]
+    # prob_sizes = [int(2 * (1.06**i)) for i in range(1, 10)]
+
+    for idx, n in enumerate(prob_sizes):
+        print(idx, n)
+        generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 1, "edges", n, n)
+        
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 3, 3)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 4, 4)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 5, 5)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 7, 7)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 10, 10)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 20, 20)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 50, 50)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 200, 200)
+        # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 10, "edges", 500, 500)
 
 
     with open(os.path.join(inputs_dir, "inputs_file_list.txt"), "w") as f:
