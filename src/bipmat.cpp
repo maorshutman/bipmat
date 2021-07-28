@@ -18,6 +18,12 @@ namespace wbm {
       std::cout << "Invalid input format name. \n";
       exit(1);
     }
+    
+    // Init with feasible prices.
+    for (int v = 0; v < n; v++) {
+      graph->v_prices[v] = graph->init_price(v);
+    }
+    
   }
   
   void BipartiteMatcher::read_cost_matrix(std::string input_path)
@@ -42,7 +48,7 @@ namespace wbm {
       costs.push_back(row);
     }
     
-      // Add edges.
+    // Add edges.
     for (int v = 0; v < n; v++) {
       for (int w = 0; w < n; w++) {
         graph->add_edge(v, w, costs[v][w]);
@@ -130,6 +136,9 @@ namespace wbm {
 
         st->set_root(r);
         graph->v_visited.insert(r);
+        
+        // Init slack.
+        graph->init_slack(r);
       }
       
       graph->search_augmenting_path(M, st, path);
@@ -137,8 +146,13 @@ namespace wbm {
       if (path.size() != 0) {  // found a good path
         augment(path);
         rebuild_tree = 1;
+        
+//        std::cout << "augemt\n";
+        
       } else {
         int delta = graph->update_prices();
+        
+//        std::cout << "update\n";
         
         if (delta != 0) {
           rebuild_tree = 0;

@@ -5,34 +5,66 @@
 #include "test.h"
 
 
-
-  // TODO:
-  // add cmd args standard way
-  // run using the binary
+#define TEST_MODE 1
 
 
-
-int main(int argc, const char * argv[]) {
+void parse_args(int argc,
+                char **argv,
+                std::string &input_file_path,
+                std::string &input_format)
+{
+  int c;
   
-    // --i,
-    // --ifmt //edges or matrix
-    // --t if want to run tests, or keep internal
-    // -h
+  while ((c = getopt(argc, argv, "i:f:oh")) != -1)
+    switch (c) {
+      case 'i':
+        input_file_path = std::string(optarg);
+        break;
+        
+      case 'f':
+        input_format = std::string(optarg);
+        break;
+        
+      case 'h':
+        std::cout << "help string" << "\n";
+        
+        break;
+        
+      case 'o':
+        std::cout << "output file path" << "\n";
+        // if no file output to stdout ?
+        break;
+        
+      case '?':
+        return;
+        
+      default:
+        // what ???
+        abort();
+      }
+}
+
+
+int main(int argc, char **argv)
+{
+#if(!TEST_MODE)
+  std::string input_file_path;
+  std::string input_format;
+  parse_args(argc, argv, input_file_path, input_format);
+
+  wbm::BipartiteMatcher* matcher = new wbm::BipartiteMatcher(input_file_path, input_format);
+  matcher->match();
   
-  int run_test = 1;
+  // TODO: output.
   
-  if (!run_test)
-  {
-    std::string input_path = "/Users/maorshutman/repos/bipmat/tests/inputs/edges_1020x1020_input_0.txt";
-    wbm::BipartiteMatcher* matcher = new wbm::BipartiteMatcher(input_path, "edges");
-    matcher->match();
-    std::cout << "min cost " << matcher->get_min_cost() << std::endl;
-    delete matcher;
-  }
-  else
-  {
-    test();
-  }
+
+  delete matcher;
+  
+#else
+  
+  test();
+
+#endif
   
   return 0;
 }

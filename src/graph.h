@@ -96,6 +96,7 @@ struct BipartiteGraph {
   std::vector<int> w_prices;
   std::unordered_set<int> v_visited;
   std::unordered_set<int> w_visited;
+  std::vector<int> slack_w;
 
 //  vector_set_t v_visited_vec;
 //  vector_set_t w_visited_vec;
@@ -109,6 +110,7 @@ struct BipartiteGraph {
       w_prices.push_back(0);
       v_matched.push_back(0);
       w_matched.push_back(0);
+      slack_w.push_back(0);
       match_mat.push_back(std::unordered_set<int>());
     }
             
@@ -202,10 +204,8 @@ struct BipartiteGraph {
           new_node->side = SIDE_W;
           leaf->add_child(new_node);
           
-          st->add_leaf(leaf, new_node);
-          
+          st->add_leaf(leaf, new_node);          
           w_visited.insert(w);
-//          w_visited_vec.insert(w);
           
           // Found a good path.
           if (!w_matched[w]) {
@@ -246,8 +246,7 @@ struct BipartiteGraph {
           st->add_leaf(leaf, new_node);
           
           v_visited.insert(v);
-//          v_visited_vec.insert(v);
-          
+          update_slack_upon_new_v(v);
         }
       }
     }
@@ -260,7 +259,8 @@ struct BipartiteGraph {
     // good_set -> in V, even levels
     // neighb_good_set -> in W, odd levels
 
-    int delta = compute_update_delta();
+//    int delta = compute_update_delta();
+    int delta = compute_update_delta_v2();
     
     for (int v : v_visited) {
       v_prices[v] += delta;
@@ -269,7 +269,21 @@ struct BipartiteGraph {
       w_prices[w] -= delta;
     }
     
+    update_slack_upon_price_update(delta);
+    
     return delta;
+  }
+  
+  inline int compute_update_delta_v2() {
+    int min = INT_MAX;
+    for (int w = 0; w < n; w++) { // n
+      if (w_visited.find(w) == w_visited.end()) { // O(1)
+        if (slack_w[w] < min) {
+          min = slack_w[w];
+        }
+      }
+    }
+    return min;
   }
   
   int compute_update_delta()
@@ -295,6 +309,31 @@ struct BipartiteGraph {
     return delta;
   }
   
+  void init_slack(int root) {
+    for (Edge* edge : V[root]) {
+      slack_w[edge->w] = reduced_cost(edge);
+    }
+  }
+  
+  inline void update_slack_upon_new_v(int v) {
+    for (Edge* edge : V[v]) {
+      if (w_visited.find(edge->w) == w_visited.end()) { // not in N(S)
+        int rc = reduced_cost(edge);
+        if (rc < slack_w[edge->w]) {
+          slack_w[edge->w] = rc;
+        }
+      }
+    }
+  }
+  
+  inline void update_slack_upon_price_update(int delta) {
+    for (int w = 0; w < n; w++) { // n
+      if (w_visited.find(w) == w_visited.end()) {
+        slack_w[w] -= delta;
+      }
+    }
+  }
+  
   inline int reduced_cost(Edge* edge) {
     return edge->cost - v_prices[edge->v] - w_prices[edge->w];
   }
@@ -304,10 +343,18 @@ struct BipartiteGraph {
   }
   
   inline int is_matched(Edge* edge, std::set<Edge*> &M) {
-//    return match_mat[edge->v][edge->w];
 //    return (M.find(edge) != M.end());
     return (match_mat[edge->v].find(edge->w) != match_mat[edge->v].end());
-//    return edge->in_match;
+  }
+  
+  int init_price(int v) {
+    int min = INT_MAX;
+    for (Edge* edge : V[v]) {
+      if (edge->cost < min) {
+        min = edge->cost;
+      }
+    }
+    return min;
   }
   
   void print_graph() {
