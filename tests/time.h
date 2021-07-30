@@ -5,7 +5,6 @@
 
 typedef std::chrono::time_point<std::chrono::high_resolution_clock> high_res_clock;
 
-
 class Timer
 {
 private:
@@ -25,6 +24,5 @@ public:
     return m_frequency;
   }
 };
-
 
 #endif /* time_h */

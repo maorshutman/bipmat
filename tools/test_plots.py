@@ -17,25 +17,15 @@ def main():
 	for sz in prob_sizes:
 		mean_sol_time.append(df[df["prob_size"] == sz]["sol_time"].mean())
 
-
 	x = np.linspace(min(prob_sizes), max(prob_sizes), 1000)
-	y = 2.5e-9 * (x**3)
-
+	y = 1.5e-9 * (x**3)
 
 	plt.plot(prob_sizes, mean_sol_time)
 	plt.xlabel("Problem size")
 	plt.ylabel("Time [sec]")
-
 	plt.plot(x, y)
-
-
 	plt.show()
-
-
-
-
 
 
 if __name__ == "__main__":
 	main()
-

@@ -10,6 +10,7 @@
 		36557A3C26A18DC600DBC5E3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3826A18DC600DBC5E3 /* main.cpp */; };
 		36557A3D26A18DC600DBC5E3 /* bipmat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3926A18DC600DBC5E3 /* bipmat.cpp */; };
 		36557A4026A4708F00DBC5E3 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36557A3E26A4708F00DBC5E3 /* test.cpp */; };
+		36A4AA5E26B1E7F40000B94B /* graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A4AA5D26B1E7F40000B94B /* graph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 		36557A3F26A4708F00DBC5E3 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test.h; path = ../../../tests/test.h; sourceTree = "<group>"; };
 		36557A4126A9868200DBC5E3 /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = time.h; path = ../../../tests/time.h; sourceTree = "<group>"; };
 		36A4AA5C26ADCB070000B94B /* vector_set_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector_set_t.h; path = ../../../src/vector_set_t.h; sourceTree = "<group>"; };
+		36A4AA5D26B1E7F40000B94B /* graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graph.cpp; path = ../../../src/graph.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				36557A3F26A4708F00DBC5E3 /* test.h */,
 				36557A3926A18DC600DBC5E3 /* bipmat.cpp */,
 				36557A3B26A18DC600DBC5E3 /* bipmat.h */,
+				36A4AA5D26B1E7F40000B94B /* graph.cpp */,
 				36557A3A26A18DC600DBC5E3 /* graph.h */,
 				36557A3826A18DC600DBC5E3 /* main.cpp */,
 			);
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36A4AA5E26B1E7F40000B94B /* graph.cpp in Sources */,
 				36557A3D26A18DC600DBC5E3 /* bipmat.cpp in Sources */,
 				36557A3C26A18DC600DBC5E3 /* main.cpp in Sources */,
 				36557A4026A4708F00DBC5E3 /* test.cpp in Sources */,

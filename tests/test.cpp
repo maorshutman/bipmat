@@ -3,14 +3,12 @@
 #include "time.h"
 
 
-// TODO: Add args.
 void test()
 {
-    //    std::string out_dir =
   std::string out_filename = "/Users/maorshutman/repos/bipmat/tests/test_data.txt";
-  
   std::string input_files_list = "/Users/maorshutman/repos/bipmat/tests/inputs/inputs_file_list.txt";
   std::string output_files_list = "/Users/maorshutman/repos/bipmat/tests/outputs/outputs_file_list.txt";
+  
   std::vector<std::string> input_file_paths;
   std::vector<std::string> output_file_paths;
   
