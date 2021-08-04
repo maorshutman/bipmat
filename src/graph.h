@@ -97,8 +97,11 @@ struct BipartiteGraph {
   std::vector<int> w_prices;
   std::unordered_set<int> v_visited;
   std::unordered_set<int> w_visited;
-  std::vector<int> slack_w;
   std::vector<std::unordered_set<int>> match_mat;
+  
+  std::vector<int> slack_w;
+  std::vector<int> slack_w_flag;
+  
 
   BipartiteGraph(int n);
   ~BipartiteGraph();
@@ -114,6 +117,8 @@ struct BipartiteGraph {
   
   void init_slack(int root);
   inline int compute_update_delta();
+  int compute_update_delta_dbg();
+  
   inline void update_slack_upon_new_v(int v);
   inline void update_slack_upon_price_update(int delta);
   

@@ -142,7 +142,11 @@ void BipartiteMatcher::match()
     if (path.size() != 0) {  // found a good path
       augment(path);
       rebuild_tree = 1;
+//      std::cout << "augment \n";
+      
     } else {
+//      std::cout << "update prices \n";
+      
       int delta = graph->update_prices();
       if (delta != 0) {
         rebuild_tree = 0;

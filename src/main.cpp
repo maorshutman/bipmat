@@ -5,7 +5,7 @@
 #include "bipmat.h"
 #include "test.h"
 
-#define TEST_MODE 0
+#define TEST_MODE 1
 
 
 struct options_t {

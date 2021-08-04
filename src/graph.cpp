@@ -12,7 +12,10 @@ BipartiteGraph::BipartiteGraph(int n) {
     w_prices.push_back(0);
     v_matched.push_back(0);
     w_matched.push_back(0);
+    
     slack_w.push_back(0);
+    slack_w_flag.push_back(0);
+    
     match_mat.push_back(std::unordered_set<int>());
   }
   
@@ -155,6 +158,7 @@ TreeNode* BipartiteGraph::bfs_step_odd_level(SearchTree *st, std::unordered_set<
 int BipartiteGraph::update_prices()
 {
   int delta = compute_update_delta();
+//  int delta_dbg = compute_update_delta_dbg();
   
   for (int v : v_visited) {
     v_prices[v] += delta;
@@ -171,7 +175,7 @@ int BipartiteGraph::update_prices()
 inline int BipartiteGraph::compute_update_delta() {
   int min = INT_MAX;
   for (int w = 0; w < n; w++) {
-    if (w_visited.find(w) == w_visited.end()) {
+    if ((w_visited.find(w) == w_visited.end()) && slack_w_flag[w]) {
       if (slack_w[w] < min) {
         min = slack_w[w];
       }
@@ -180,15 +184,45 @@ inline int BipartiteGraph::compute_update_delta() {
   return min;
 }
 
+int BipartiteGraph::compute_update_delta_dbg()
+  {
+    // Consider edges s.t. v in S, w not in N(S). Maximal delta that zeros one
+    // of these edges.
+    
+    int delta = INT_MAX;
+    int rc;
+    for (int v : v_visited) {  // v is in S
+      for (Edge* edge : V[v]) {
+        // If w is not in N(S)
+        if (w_visited.find(edge->w) == w_visited.end()) {
+//        if (!w_visited_vec.find(edge->w)) {
+          rc = reduced_cost(edge);
+          if (rc < delta) {
+            delta = rc;
+          }
+        }
+      }
+    }
+    
+    return delta;
+  }
+
 void BipartiteGraph::init_slack(int root) {
+  for (int w = 0; w < n; w++) {
+    slack_w_flag[w] = 0;
+    slack_w[w] = INT_MAX;
+  }
+  
   for (Edge* edge : V[root]) {
     slack_w[edge->w] = reduced_cost(edge);
+    slack_w_flag[edge->w] = 1;
   }
 }
 
 inline void BipartiteGraph::update_slack_upon_new_v(int v) {
   for (Edge* edge : V[v]) {
     if (w_visited.find(edge->w) == w_visited.end()) {
+      slack_w_flag[edge->w] = 1;
       int rc = reduced_cost(edge);
       if (rc < slack_w[edge->w]) {
         slack_w[edge->w] = rc;
@@ -199,7 +233,7 @@ inline void BipartiteGraph::update_slack_upon_new_v(int v) {
 
 inline void BipartiteGraph::update_slack_upon_price_update(int delta) {
   for (int w = 0; w < n; w++) { // n
-    if (w_visited.find(w) == w_visited.end()) {
+    if ((w_visited.find(w) == w_visited.end()) && slack_w_flag[w]) {
       slack_w[w] -= delta;
     }
   }
