@@ -5,12 +5,12 @@
 # Example
 
 ## Input from a txt file
-We can specify a problem in **edge** or **matrix** format. For **edges** prepare a txt file where you specify the problem size and then you list all the edges and their weights.
+You can specify a problem in **edge** or **matrix** format. For **edges** prepare a txt file where you specify the problem size and then you list all the edges and their weights.
 
 ```
 <problem_size>
-<v_index> <w_index weight>
-<v_index> <w_index weight>
+<v_index> <w_index> <weight>
+<v_index> <w_index> <weight>
 ...
 ...
 ```
@@ -65,12 +65,12 @@ delete matcher;
 ```bipmat``` solves **dense** (10<sup>3</sup>)x(10<sup>3</sup>) problem in ~1sec. Here is the performace with i5 CPU, and clang with -O3 optimization.
 
 
-![perf](tools/perf_plot_O3_opt.png "perf")
+![](tools/perf_plot_O3_opt.png "perf")
 
 
 # References
-- https://www.youtube.com/watch?v=Wq2tkITYYHE.
-- https://web.archive.org/web/20060812030313/http://www.math.uwo.ca/~mdawes/courses/344/kuhn-munkres.pdf
+1. https://www.youtube.com/watch?v=Wq2tkITYYHE.
+2. https://web.archive.org/web/20060812030313/http://www.math.uwo.ca/~mdawes/courses/344/kuhn-munkres.pdf
 
 
 
