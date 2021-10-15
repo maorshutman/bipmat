@@ -1,11 +1,11 @@
 # bipmat
 
-```bipmat``` (**bip**artite **mat**ching) solved weighted bipartite matching problems using the Kuhn-Munkres (Hungarian) algorithm. The implementaiton here is O(n<sup>3</sup>).
+```bipmat``` (**bip**artite **mat**ching) solves weighted bipartite matching problems using the Kuhn-Munkres (Hungarian) algorithm. The implementaiton here has complexity O(n<sup>3</sup>). ```bipmat``` uses a graph implementation so sparse problems are solved much faster then dense problems. Note that in the case of sparse problems, they have to be feasible.
 
 # Example
 
 ## Input from a txt file
-We can specify a problem in **edge** or **matrix** format. For **edges** prepare an txt file where you specify the problem size and then you list all the edges and their weights.
+We can specify a problem in **edge** or **matrix** format. For **edges** prepare a txt file where you specify the problem size and then you list all the edges and their weights.
 
 ```
 <problem_size>
@@ -42,7 +42,7 @@ where in **matrix** format the same problem will be:
 
 
 ## Building the problem in your program
-You don't have to use an input file. You can just add edges to the mathcer using the ```add_edge``` method.
+You don't have to use an input file. You can just add edges to the mathcer object ```BipartiteMatcher``` using the ```add_edge``` method.
 
 
 
@@ -62,12 +62,15 @@ delete matcher;
 
 # Performance
 
-```bipmat``` solves a (10<sup>3</sup>)x(10<sup>3</sup>) problem in ~1sec. Here is the performace with i5 cpu, and clang with -O3 opt.
+```bipmat``` solves **dense** (10<sup>3</sup>)x(10<sup>3</sup>) problem in ~1sec. Here is the performace with i5 CPU, and clang with -O3 optimization.
 
 
 ![perf](tools/perf_plot_O3_opt.png "perf")
 
 
+# References
+- https://www.youtube.com/watch?v=Wq2tkITYYHE.
+- https://web.archive.org/web/20060812030313/http://www.math.uwo.ca/~mdawes/courses/344/kuhn-munkres.pdf
 
 
 
