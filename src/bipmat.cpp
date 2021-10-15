@@ -19,6 +19,13 @@ BipartiteMatcher::BipartiteMatcher(std::string input_path, std::string format)
     exit(1);
   }
   
+  
+  
+  // TODO: Add auxilary edges in case the original problem in not feasible.
+//  for (int v = 0; v < n; v++) {
+//    graph->add_edge(v, v, INT_MAX>>1);
+//  }
+//  
   // Init with feasible prices.
   for (int v = 0; v < n; v++) {
     graph->v_prices[v] = graph->init_price(v);
@@ -32,7 +39,7 @@ void BipartiteMatcher::read_cost_matrix(std::string input_path)
   std::string line;
   int val;
   
-    // Read problem size.
+  // Read problem size.
   getline(input, line);
   std::istringstream(line) >> this->n;
   graph = new BipartiteGraph(this->n);
@@ -110,7 +117,7 @@ void BipartiteMatcher::match()
   
   SearchTree *st = new SearchTree();
   st->set_root(0);
-  
+    
   while (M.size() != n) {  // if matching is not perferct
     if (rebuild_tree) {
       st->clear();
@@ -154,6 +161,10 @@ void BipartiteMatcher::match()
         rebuild_tree = 1;  // TODO: Why this happens ?
       }
     }
+  }
+  
+  for (int i = 0; i < n; i++) {
+    assert(graph->v_matched[i] && graph->w_matched[i]);
   }
   
   min_cost = 0;

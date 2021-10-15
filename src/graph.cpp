@@ -158,7 +158,6 @@ TreeNode* BipartiteGraph::bfs_step_odd_level(SearchTree *st, std::unordered_set<
 int BipartiteGraph::update_prices()
 {
   int delta = compute_update_delta();
-//  int delta_dbg = compute_update_delta_dbg();
   
   for (int v : v_visited) {
     v_prices[v] += delta;
@@ -195,7 +194,6 @@ int BipartiteGraph::compute_update_delta_dbg()
       for (Edge* edge : V[v]) {
         // If w is not in N(S)
         if (w_visited.find(edge->w) == w_visited.end()) {
-//        if (!w_visited_vec.find(edge->w)) {
           rc = reduced_cost(edge);
           if (rc < delta) {
             delta = rc;
@@ -248,7 +246,6 @@ inline int BipartiteGraph::is_tight(Edge* edge) {
 }
 
 inline int BipartiteGraph::is_matched(Edge* edge, std::unordered_set<Edge*> &M) {
-//    return (M.find(edge) != M.end());
   return (match_mat[edge->v].find(edge->w) != match_mat[edge->v].end());
 }
 
@@ -260,24 +257,4 @@ int BipartiteGraph::init_price(int v) {
     }
   }
   return min;
-}
-
-void BipartiteGraph::print_graph() {
-  std::cout << "V:" << "\n";
-  for (int i = 0; i < V.size(); i++) {
-    std::cout << i << "-> ";
-    for (int j = 0; j < V[i].size(); j++) {
-      std::cout << "(" << V[i][j]->v << "," << V[i][j]->w << "," << V[i][j]->cost << "," <<  reduced_cost(V[i][j]) << "), ";
-    }
-    std::cout << "\n";
-  }
-  
-  std::cout << "W:" << "\n";
-  for (int i = 0; i < W.size(); i++) {
-    std::cout << i << "-> ";
-    for (int j = 0; j < W[i].size(); j++) {
-      std::cout << "(" << W[i][j]->v << "," << W[i][j]->w << "," << W[i][j]->cost << "," <<  reduced_cost(W[i][j]) << "), ";
-    }
-    std::cout << "\n";
-  }
 }

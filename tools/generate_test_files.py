@@ -2,6 +2,7 @@ import os
 import random
 import time
 import json
+import argparse
 
 import numpy as np
 from scipy.sparse import random
@@ -11,12 +12,12 @@ from scipy.sparse import csr_matrix, csgraph
 
 def save_test_files(
   input_file_path,
-  output_file_path,    
-  fmt, 
-  min_cost, 
+  output_file_path,
+  fmt,
+  min_cost,
   time_to_solve,
-  rows, 
-  cols, 
+  rows,
+  cols,
   costs
 ):
 
@@ -43,13 +44,13 @@ def save_test_files(
 
 
 def generate_dense_test_files(
-  inputs_dir, 
-  outputs_dir, 
-  input_file_paths, 
+  inputs_dir,
+  outputs_dir,
+  input_file_paths,
   output_file_paths,
-  num_tests, 
-  fmt, 
-  rows, 
+  num_tests,
+  fmt,
+  rows,
   cols
 ):
 
@@ -69,13 +70,13 @@ def generate_dense_test_files(
 
 
 def generate_sparse_test_files(
-  inputs_dir, 
-  outputs_dir, 
-  input_file_paths, 
+  inputs_dir,
+  outputs_dir,
+  input_file_paths,
   output_file_paths,
-  num_tests, 
-  fmt, 
-  rows, 
+  num_tests,
+  fmt,
+  rows,
   cols
 ):
 
@@ -105,33 +106,42 @@ def generate_sparse_test_files(
     save_test_files(input_file_path, output_file_path, fmt, min_cost, time_to_solve, rows, cols, costs)
 
 
+
+def parse_args():
+  parser = argparse.ArgumentParser(description='')
+  parser.add_argument('--inputs_dir', type=str, required=True, default='', help='')
+  parser.add_argument('--outputs_dir', type=str, required=True, default='', help='')
+  parser.add_argument('--mode', type=str, required=False, default='dense', help='')
+  return parser.parse_args()
+
+
 def main():
 
-  # TODO: Add args
-
-  inputs_dir = "/Users/maorshutman/repos/bipmat/tests/inputs"
-  outputs_dir = "/Users/maorshutman/repos/bipmat/tests/outputs"
+  args = parse_args()
 
   input_file_paths = []
   output_file_paths = []
 
   prob_sizes = [int(2 * (1.10**i)) for i in range(1, 70)]
-  # prob_sizes = [int(2 * (1.06**i)) for i in range(1, 10)]
-
-  # generate_sparse_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 100, "edges", 4, 4)
 
   for idx, n in enumerate(prob_sizes):
     print(idx, n)
-    # generate_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 1, "edges", n, n)
-    generate_sparse_test_files(inputs_dir, outputs_dir, input_file_paths, output_file_paths, 1, "edges", n, n)
- 
-  with open(os.path.join(inputs_dir, "inputs_file_list.txt"), "w") as f:
-    for path in input_file_paths:
-      f.write(path + "\n")   
+    if args.mode == "dense":
+      generate_dense_test_files(
+        args.inputs_dir, args.outputs_dir, input_file_paths, output_file_paths, 1, "edges", n, n
+      )
+    elif args.mode == "sparse":
+      generate_sparse_test_files(
+        args.inputs_dir, args.outputs_dir, input_file_paths, output_file_paths, 1, "edges", n, n
+      )
 
-  with open(os.path.join(outputs_dir, "outputs_file_list.txt"), "w") as f:
+  with open(os.path.join(args.inputs_dir, "inputs_file_list.txt"), "w") as f:
+    for path in input_file_paths:
+      f.write(path + "\n")
+
+  with open(os.path.join(args.outputs_dir, "outputs_file_list.txt"), "w") as f:
     for path in output_file_paths:
-      f.write(path + "\n")   
+      f.write(path + "\n")
 
 
 if __name__ == "__main__":

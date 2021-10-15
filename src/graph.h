@@ -6,7 +6,6 @@
 #include <vector>
 #include <unordered_set>
 #include <queue>
-#include "vector_set_t.h"
 
 
 #define SIDE_V 0
@@ -125,8 +124,6 @@ struct BipartiteGraph {
   inline int reduced_cost(Edge* edge);
   inline int is_tight(Edge* edge);
   inline int is_matched(Edge* edge, std::unordered_set<Edge*> &M);
-  
-  void print_graph();
 
 };
 

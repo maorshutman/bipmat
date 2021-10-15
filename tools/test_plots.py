@@ -1,14 +1,22 @@
+import argparse
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+plt.rcParams['axes.linewidth'] = 0.5
+
+
+def parse_args():
+  parser = argparse.ArgumentParser(description='')
+  parser.add_argument('--data_file_path', type=str, required=True, default='', help='')
+  return parser.parse_args()
+
 
 def main():
+  args = parse_args()
 
-  data_file_path = "/Users/maorshutman/repos/bipmat/tests/test_data.txt"
-
-  df = pd.read_csv(data_file_path)
+  df = pd.read_csv(args.data_file_path)
   df.columns = ["prob_size", "sol_time"]
 
   prob_sizes = sorted(df["prob_size"].unique())
@@ -17,13 +25,13 @@ def main():
   for sz in prob_sizes:
     mean_sol_time.append(df[df["prob_size"] == sz]["sol_time"].mean())
 
-  x = np.linspace(min(prob_sizes), max(prob_sizes), 1000)
-  y = 1.5e-9 * (x**3)
+  plt.plot(prob_sizes, mean_sol_time, linewidth=2)
+  plt.xlabel("Problem size", style="italic")
+  plt.ylabel("Time [sec]", style="italic")
+  plt.yscale("log")
+  plt.xscale("log")
 
-  plt.plot(prob_sizes, mean_sol_time)
-  plt.xlabel("Problem size")
-  plt.ylabel("Time [sec]")
-  plt.plot(x, y)
+  plt.grid(linestyle="--", linewidth=1)
   plt.show()
 
 
